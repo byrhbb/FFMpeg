@@ -135,5 +135,23 @@ public class FFMpegMovieViewAndroid extends SurfaceView {
 			//Log.d(TAG, "want buffer percentage");
 			return 0;
 		}
+
+		@Override
+		public boolean canPause() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean canSeekBackward() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean canSeekForward() {
+			// TODO Auto-generated method stub
+			return false;
+		}
 	};
 }

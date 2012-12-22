@@ -45,6 +45,8 @@ MediaPlayer::MediaPlayer()
     mLeftVolume = mRightVolume = 1.0;
     mVideoWidth = mVideoHeight = 0;
     sPlayer = this;
+    isFirstFrame = true;
+    firstFrameTime = -1;
 }
 
 MediaPlayer::~MediaPlayer()
@@ -442,7 +444,13 @@ status_t MediaPlayer::getCurrentPosition(int *msec)
 	if (mCurrentState < MEDIA_PLAYER_PREPARED) {
 		return INVALID_OPERATION;
 	}
-	*msec = 0/*av_gettime()*/;
+	/**msec = 0 av_gettime()*/;
+	int64_t tmp = av_gettime();
+	if(isFirstFrame) {
+		isFirstFrame = false;
+		firstFrameTime = tmp;
+	}
+	*msec = (tmp - firstFrameTime)/1000;
 	//__android_log_print(ANDROID_LOG_INFO, TAG, "position %i", *msec);
 	return NO_ERROR;
 }

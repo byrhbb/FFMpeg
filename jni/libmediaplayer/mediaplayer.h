@@ -184,6 +184,8 @@ private:
     float                       mRightVolume;
     int                         mVideoWidth;
     int                         mVideoHeight;
+    bool                        isFirstFrame;
+    int64_t                     firstFrameTime;
 };
 
 #endif // FFMPEG_MEDIAPLAYER_H
